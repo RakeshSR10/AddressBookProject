@@ -20,6 +20,7 @@ public class AddressBook {
     protected static String phoneNumber;
     protected static String zip;
     protected static String email;
+    
     //UC6 - Adding multiple AddressBooks
     protected static Map<String,AddressBook> multipleAddressBook = new HashMap<String,AddressBook>();
 
