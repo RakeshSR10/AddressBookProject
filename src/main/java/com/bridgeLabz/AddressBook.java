@@ -170,7 +170,7 @@ public class AddressBook {
         String cityName=userInput.nextLine();
         for(Map.Entry m : multipleAddressBook.entrySet()){
             AddressBook addressbook=(AddressBook) m.getValue();
-            for(String city : addressbook.contact) {
+            for(String city : addressbook.city) {
                 if(city.equalsIgnoreCase(cityName)) {
                     flag=1;
                     System.out.println(first_Name+" "+last_Name);
