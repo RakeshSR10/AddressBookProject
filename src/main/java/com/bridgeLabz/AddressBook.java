@@ -149,6 +149,15 @@ public class AddressBook {
                 System.out.println("Invalid Key Enter Correct key");
         }
     }
+
+    //UC7 - Ability to check duplicate entries of person
+    public static boolean checkIsDuplicate(String personName){
+        if(first_Name.contains(personName))
+            return true;
+        else
+            return false;
+    }
+    
     //show person details
     private static void showContact() {
         System.out.println(contact);
