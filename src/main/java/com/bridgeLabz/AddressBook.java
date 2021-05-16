@@ -20,6 +20,7 @@ public class AddressBook {
     protected static String phoneNumber;
     protected static String zip;
     protected static String email;
+
     //UC6 - Adding multiple AddressBooks
     protected static Map<String,AddressBook> multipleAddressBook = new HashMap<String,AddressBook>();
 
@@ -199,6 +200,28 @@ public class AddressBook {
         if(flag==0)
             System.out.println("This state does not exists!");
     }
+
+    //UC10 - Count person by city
+    public static void countPersonsByCity(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the city name ");
+        String cityName= sc.nextLine();
+        List<Contact>personsInCity=getPersonsByCity(cityName);
+        if(personsInCity.isEmpty())
+            System.out.println("City "+cityName+" Does Not Exists !");
+        else
+            System.out.println("Total No. Of Persons Found In "+cityName.toUpperCase()+" Are :"+personsInCity.stream().count());
+    }
+
+    public static List<Contact> getPersonsByCity(String cityName) {
+        List<Contact> list = personsInCity.entrySet()
+                                          .stream()
+                                          .filter(city->city.getValue().equalsIgnoreCase(cityName))
+                                          .map(personInCity->personInCity.getKey())
+                                          .collect(Collectors.toList());
+        return list;
+    }
+    
     //show person details
     private static void showContact() {
         System.out.println(contact);
