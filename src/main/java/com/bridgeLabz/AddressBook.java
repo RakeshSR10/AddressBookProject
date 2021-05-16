@@ -170,7 +170,7 @@ public class AddressBook {
         String cityName=userInput.nextLine();
         for(Map.Entry m : multipleAddressBook.entrySet()){
             AddressBook addressbook=(AddressBook) m.getValue();
-            for(String city : addressbook.contact) {
+            for(String city : addressbook.city) {
                 if(city.equalsIgnoreCase(cityName)) {
                     flag=1;
                     System.out.println(first_Name+" "+last_Name);
@@ -181,6 +181,24 @@ public class AddressBook {
             System.out.println("This City does not exists!");
     }
 
+    //UC9 search person using state
+    public static void searchPersonInState(){
+        Scanner user = new Scanner(System.in);
+        System.out.print("Enter State name :");
+        int flag=0;
+        String stateName=user.nextLine();
+        for(Map.Entry m : multipleAddressBook.entrySet()){
+            AddressBook addressbook=(AddressBook) m.getValue();
+            for(String state : addressbook.state) {
+                if(state.equalsIgnoreCase(stateName)) {
+                    flag=1;
+                    System.out.println(first_Name);
+                }
+            }
+        }
+        if(flag==0)
+            System.out.println("This state does not exists!");
+    }
     //show person details
     private static void showContact() {
         System.out.println(contact);
