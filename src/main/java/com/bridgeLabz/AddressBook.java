@@ -1,9 +1,12 @@
 package com.bridgeLabz;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBook {
     Scanner scanner = new Scanner(System.in);
+    ArrayList<String> contact = new ArrayList<String>();
+
     //UC1 creating contact
     public String first_Name;
     public String last_Name;
@@ -66,10 +69,30 @@ public class AddressBook {
 
     }
 
+    //UC4 - Delete Contact
+    private void deleteContact() {
+        System.out.println("Enter name of the person to delete details:");
+        String deleteName = scanner.next();
+        if(deleteName.equalsIgnoreCase(first_Name)){
+            contact.remove(first_Name);
+            contact.remove(last_Name);
+            contact.remove(city);
+            contact.remove(state);
+            contact.remove(address);
+            contact.remove(phoneNumber);
+            contact.remove(zip);
+            contact.remove(email);
+            System.out.println(contact);
+        }else{
+            System.out.println("Invalid Name...!");
+            deleteContact();
+        }
+    }
+    //main
     public static void main(String[] args) {
         AddressBook addressBook = new AddressBook();
         addressBook.addContact();
         addressBook.editContact();
+        addressBook.deleteContact();
     }
-
 }
