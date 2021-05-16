@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class AddressBook {
     Scanner scanner = new Scanner(System.in);
+
+    //UC5 - Add multiple person contact using Collection
     ArrayList<String> contact = new ArrayList<String>();
 
     //UC1 creating contact
@@ -20,46 +22,48 @@ public class AddressBook {
     //UC2 - Add contact details
     private void addContact() {
         System.out.println("Enter First Name:");
-        first_Name = scanner.next();
+        contact.add(first_Name = scanner.next());
         System.out.println("Enter Last Name:");
-        last_Name = scanner.next();
+        contact.add(last_Name = scanner.next());
         System.out.println("Enter City Name:");
-        city = scanner.next();
+        contact.add(city = scanner.next());
         System.out.println("Enter State Name:");
-        state = scanner.next();
+        contact.add(state = scanner.next());
         System.out.println("Enter Address:");
-        address = scanner.next();
+        contact.add(address = scanner.next());
         System.out.println("Enter Phone Number:");
-        phoneNumber = scanner.next();
+        contact.add(phoneNumber = scanner.next());
         System.out.println("Enter Zip:");
-        zip = scanner.next();
+        contact.add(zip = scanner.next());
         System.out.println("Enter Email:");
-        email = scanner.next();
+        contact.add(email = scanner.next());
 
-        System.out.println(first_Name+", "+last_Name+", "+city+", "+state+", "+address+", "+phoneNumber+", "+zip+", "+email);
+        System.out.println(contact);
     }
 
     //UC3 - Edit Contact
     private void editContact() {
         System.out.println("Enter name of the person to edit details:");
         String editName = scanner.next();
-        if(editName.equalsIgnoreCase(first_Name)){
+        int position = first_Name.indexOf(editName);
+
+        if(first_Name.equalsIgnoreCase(editName)){
             System.out.println("Edit First Name:");
-            first_Name = scanner.next();
+            contact.set(position,first_Name = scanner.next());
             System.out.println("Edit Last Name:");
-            last_Name = scanner.next();
+            contact.set(position,last_Name = scanner.next());
             System.out.println("Edit City Name:");
-            city = scanner.next();
+            contact.set(position,city = scanner.next());
             System.out.println("Edit State Name:");
-            state = scanner.next();
+            contact.set(position,state = scanner.next());
             System.out.println("Edit Address:");
-            address = scanner.next();
+            contact.set(position,address = scanner.next());
             System.out.println("Edit Phone Number:");
-            phoneNumber = scanner.next();
+            contact.set(position,phoneNumber = scanner.next());
             System.out.println("Edit Zip:");
-            zip = scanner.next();
+            contact.set(position,zip = scanner.next());
             System.out.println("Edit Email:");
-            email = scanner.next();
+            contact.set(position,email = scanner.next());
 
             System.out.println(first_Name+", "+last_Name+", "+city+", "+state+", "+address+", "+phoneNumber+", "+zip+", "+email);
         }else {
@@ -88,11 +92,46 @@ public class AddressBook {
             deleteContact();
         }
     }
+
+    private void userOptions(){
+        while(true)
+        {
+            System.out.println("1)Add person contact\n2)Show details of person\n3)Delete person contact\n4)Edit person contact\n5)Exit");
+            int select = scanner.nextInt();
+            switch(select)
+            {
+                case 1:
+                    addContact();
+                    break;
+
+                case 2:
+                    showContact();
+                    break;
+
+                case 3:
+                    deleteContact();
+                    break;
+
+                case 4:
+                    editContact();
+                    break;
+
+                case 5:
+                    System.exit(0);
+                    break;
+                default :
+                    System.out.println("Invalid Input");
+            }
+        }
+    }
+    //show person details
+    private void showContact() {
+        System.out.println(contact);
+    }
+
     //main
     public static void main(String[] args) {
         AddressBook addressBook = new AddressBook();
-        addressBook.addContact();
-        addressBook.editContact();
-        addressBook.deleteContact();
+        addressBook.userOptions();
     }
 }
