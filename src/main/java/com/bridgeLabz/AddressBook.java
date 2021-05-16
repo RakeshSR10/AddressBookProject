@@ -101,7 +101,8 @@ public class AddressBook {
         System.out.println("Enter your choice from below option:");
         while(true)
         {
-            System.out.println("1)Add person contact\n2)Show details of person\n3)Delete person contact\n4)Edit person contact\n5)Exit");
+            System.out.println("1)Add person contact\n2)Show details of person\n3)Delete person contact\n" +
+                                "4)Edit person contact\n5)Search person by city\n6)Exit ");
             int select = scanner.nextInt();
 
             switch(select)
@@ -123,6 +124,9 @@ public class AddressBook {
                     break;
 
                 case 5:
+                    searchPersonIncity();
+                    break;
+                case 6:
                     System.exit(0);
                     break;
                 default :
@@ -157,7 +161,26 @@ public class AddressBook {
         else
             return false;
     }
-    
+
+    //UC8 search person using city across multiple AddressBooks
+    public static void searchPersonIncity(){
+        Scanner userInput=new Scanner(System.in);
+        System.out.print("Enter city name :");
+        int flag=0;
+        String cityName=userInput.nextLine();
+        for(Map.Entry m : multipleAddressBook.entrySet()){
+            AddressBook addressbook=(AddressBook) m.getValue();
+            for(String city : addressbook.contact) {
+                if(city.equalsIgnoreCase(cityName)) {
+                    flag=1;
+                    System.out.println(first_Name+" "+last_Name);
+                }
+            }
+        }
+        if(flag==0)
+            System.out.println("This City does not exists!");
+    }
+
     //show person details
     private static void showContact() {
         System.out.println(contact);

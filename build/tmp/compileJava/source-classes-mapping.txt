@@ -1,4 +1,2 @@
-com/bridgeLabz/Contact.java
- com.bridgeLabz.Contact
 com/bridgeLabz/AddressBook.java
  com.bridgeLabz.AddressBook
