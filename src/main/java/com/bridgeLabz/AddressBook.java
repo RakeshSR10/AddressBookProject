@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 
 public class AddressBook {
     static Scanner scanner = new Scanner(System.in);
@@ -221,7 +224,12 @@ public class AddressBook {
                                           .collect(Collectors.toList());
         return list;
     }
-    
+
+    //UC11 Ability sort person by using name
+    public static void sortByName(){
+        first_Name.stream().sorted().forEach(System.out::println);
+
+    }
     //show person details
     private static void showContact() {
         System.out.println(contact);
