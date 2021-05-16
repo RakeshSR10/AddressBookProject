@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.Comparator;
 
 
 public class AddressBook {
@@ -105,36 +106,69 @@ public class AddressBook {
         System.out.println("Enter your choice from below option:");
         while(true)
         {
-            System.out.println("1)Add person contact\n2)Show details of person\n3)Delete person contact\n" +
-                                "4)Edit person contact\n5)Search person by city\n6)Exit ");
+            System.out.println("1)Add person contact\n2)Show person contact\n3)Delete person contact\n4)Edit person contact\n" +
+                               "5)Goto other AddressBook\n6)Search person in city\n7)Search person in state\n" +
+                               "8)Count the person by city\n9)Sort person by name\n10)Sort By City\n11)Sort by state\n12)Sort by zip\n13)Exit");
+
             int select = scanner.nextInt();
 
             switch(select)
             {
                 case 1:
-                    addContact();
+                    book.setDetails();
                     break;
 
                 case 2:
-                    showContact();
+                    book.showDetails();
                     break;
 
                 case 3:
-                    deleteContact();
+                    book.deleteDetails();
                     break;
 
                 case 4:
-                    editContact();
+                    book.editDetails();
                     break;
 
                 case 5:
+                    setMultipleBook();
+                    break;
+
+                case 6:
                     searchPersonIncity();
                     break;
-                case 6:
+
+                case 7:
+                    searchPersonInState();
+                    break;
+
+                case 8:
+                    countPersonsByCity();
+                    break;
+
+                case 9:
+                    sortByName();
+                    break;
+
+                case 10:
+                    sortPersonsByCity();
+                    break;
+
+                case 11:
+                    sortPersonsByState();
+                    break;
+
+                case 12:
+                    sortPersonsByZipCode();
+                    break;
+
+                case 13:
                     System.exit(0);
                     break;
+
                 default :
                     System.out.println("Invalid Input");
+
             }
         }
     }
@@ -228,8 +262,34 @@ public class AddressBook {
     //UC11 Ability sort person by using name
     public static void sortByName(){
         first_Name.stream().sorted().forEach(System.out::println);
+    }
+
+    //UC12 Ability sort by city,state and zip
+    public static void sortPersonsByCity() {
+        List<String> cityName = city.stream().sorted().
+                collect(Collectors.toList());
+        System.out.println("Sorted list by city");
+        cityName.forEach(System.out::println);
 
     }
+
+    //by state
+    public static void sortPersonsByState() {
+        List<String> stateName = state.stream().sorted().
+                collect(Collectors.toList());
+        System.out.println("Sorted list by state");
+        stateName.forEach(System.out::println);
+
+    }
+
+    //by zip
+    public static void sortPersonsByZipCode() {
+        List<String> zipcode = zip.stream().sorted().
+                collect(Collectors.toList());
+        System.out.println("Sorted list by zipcode");
+        zipcode.forEach(System.out::println);
+    }
+
     //show person details
     private static void showContact() {
         System.out.println(contact);
