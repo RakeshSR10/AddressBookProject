@@ -1,26 +1,30 @@
 package com.bridgeLabz;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBook {
-    Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
     //UC5 - Add multiple person contact using Collection
-    ArrayList<String> contact = new ArrayList<String>();
+    static ArrayList<String> contact = new ArrayList<String>();
 
     //UC1 creating contact
-    public String first_Name;
-    public String last_Name;
-    public String city;
-    public String state;
-    public String address;
-    public String phoneNumber;
-    public String zip;
-    public String email;
+    protected static String first_Name;
+    protected static String last_Name;
+    protected static String city;
+    protected static String state;
+    protected static String address;
+    protected static String phoneNumber;
+    protected static String zip;
+    protected static String email;
+    //UC6 - Adding multiple AddressBooks
+    protected static Map<String,AddressBook> multipleAddressBook = new HashMap<String,AddressBook>();
 
     //UC2 - Add contact details
-    private void addContact() {
+    private static void addContact() {
         System.out.println("Enter First Name:");
         contact.add(first_Name = scanner.next());
         System.out.println("Enter Last Name:");
@@ -41,8 +45,8 @@ public class AddressBook {
         System.out.println(contact);
     }
 
-    //UC3 - Edit Contact
-    private void editContact() {
+    //UC3 - Edit Contact using name
+    private static void editContact() {
         System.out.println("Enter name of the person to edit details:");
         String editName = scanner.next();
         int position = first_Name.indexOf(editName);
@@ -74,7 +78,7 @@ public class AddressBook {
     }
 
     //UC4 - Delete Contact
-    private void deleteContact() {
+    private static void deleteContact() {
         System.out.println("Enter name of the person to delete details:");
         String deleteName = scanner.next();
         if(deleteName.equalsIgnoreCase(first_Name)){
@@ -93,11 +97,13 @@ public class AddressBook {
         }
     }
 
-    private void userOptions(){
+    private static void userOptions(AddressBook book){
+        System.out.println("Enter your choice from below option:");
         while(true)
         {
             System.out.println("1)Add person contact\n2)Show details of person\n3)Delete person contact\n4)Edit person contact\n5)Exit");
             int select = scanner.nextInt();
+
             switch(select)
             {
                 case 1:
@@ -124,14 +130,37 @@ public class AddressBook {
             }
         }
     }
+
+    // Add Multiple Address Books
+    public static void setMultipleBook(){
+        Scanner user = new Scanner(System.in);
+        System.out.println("List of Address Books: ");
+        for(Map.Entry m :multipleAddressBook.entrySet()){
+            System.out.println(m.getKey());
+        }
+        while(true){
+            System.out.println("Enter key of AddressBook which you have to access ");
+            String key = user.nextLine();
+            if(multipleAddressBook.containsKey(key)){
+                userOptions(multipleAddressBook.get(key));
+                break;
+            }
+            else
+                System.out.println("Invalid Key Enter Correct key");
+        }
+    }
     //show person details
-    private void showContact() {
+    private static void showContact() {
         System.out.println(contact);
     }
 
     //main
     public static void main(String[] args) {
-        AddressBook addressBook = new AddressBook();
-        addressBook.userOptions();
+        AddressBook AddressBook1 = new AddressBook();
+        AddressBook AddressBook2 = new AddressBook();
+        multipleAddressBook.put("AddressBook1",AddressBook1);
+        multipleAddressBook.put("AddressBook2",AddressBook2);
+
+        setMultipleBook();
     }
 }
